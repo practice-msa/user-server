@@ -31,16 +31,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/h2-console/**","/sign-api/sign-in","sign-api/sign-up","/sign-api/exception").permitAll()
-
+                .antMatchers("/h2-console/**","sign-api/sign-up","/sign-api/exception").permitAll()
+                .antMatchers("/sign-api/sign-up").permitAll()
+                .antMatchers("/sign-api/sign-in").permitAll()
                 .antMatchers("**exception**").permitAll()
 
                 .anyRequest().hasRole("Admin")
 
-//                .and()
-//                .exceptvionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())
-//                .and()
-//                .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+                .and()
+                .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())
+                .and()
+                .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
 
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
@@ -48,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity webSecurity){
-        webSecurity.ignoring().antMatchers("/v2/api-docs","/h2-console/**");
+        webSecurity.ignoring().antMatchers("/v2/api-docs","/h2-console/**","/sign-api/exception");
     }
 
 

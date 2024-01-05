@@ -1,6 +1,6 @@
 spring:
   jwt:
-    secret: mySecretKey
+    secret: fynb2HnbxevBkSHOftnUWEfG2PXEL0Jp4Gh0eLWX2aE=
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:test
@@ -21,6 +21,9 @@ spring:
         show_sql: true        # 쿼리 로그 출력
 logging:
   level:
+    org:
+      springframework:
+        security: DEBUG
     org.hibernate.SQL: debug
     org.hibernate.type: trace
 

@@ -30,9 +30,11 @@ logging:
     org.hibernate.type: trace
 
 server:
-  port: 8090
+  port: 0
 
 eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
   client:
     register-with-eureka: true
     fetch-registry: true
